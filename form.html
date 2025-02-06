@@ -78,16 +78,21 @@
         <h1>Car Rental Booking Form</h1>
         <form id="calcForm" method="post" action="http://localhost:3000">
             <label for="pickup-location">Pickup Location:</label>
-            <input type="text" id="pickup-location" name="pickup" required>
+            <input type="text" id="pickup-location" name="pickUp" required>
     
             <label for="dropoff-location">Dropoff Location:</label>
-            <input type="text" id="dropoff-location" name="dropoff" required>
+            <input type="text" id="dropoff-location" name="dropOff" required>
 
             <label for="pickup-date">Pickup Date:</label>
-            <input type="date" id="pickup-date" name="pickupdate" required>
+            <input type="date" id="pickup-date" name="pickUpDate" required>
     
             <label for="dropoff-date">Dropoff Date:</label>
-            <input type="date" id="dropoff-date" name="dropoffdate" required>
+            <input type="date" id="dropoff-date" name="dropOffDate" required>
+
+            <label for="licence-date">When did you get your licence:</label>
+            <input type="date" id="licence-date" name="licenceIssueDate" required>
+            
+            <br/>
 
             <label for="car-type">Car Type:</label>
             <select id="car-type" name="type">
