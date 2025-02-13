@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const rental = require("./rentalPrice");
+const rental = require("./src/rentalPrice");
 const fs = require("fs");
 
 const app = express();

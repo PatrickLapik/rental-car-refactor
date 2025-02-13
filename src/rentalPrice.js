@@ -1,4 +1,3 @@
-const carTypes = ["Compact", "Electric", "Cabrio", "Racer"];
 const minLicenceYears = 1;
 
 function price({
@@ -43,7 +42,7 @@ function isDriverElegible({ age, carClass, licenceYearsHeld }) {
     return "Driver too young - cannot quote the price";
   }
 
-  if (licenceYearsHeld <= minLicenceYears) {
+  if (licenceYearsHeld < minLicenceYears) {
     return "Driver has not held the licence long enough";
   }
 
@@ -87,12 +86,13 @@ function getLicenceYearsHeld(licenceIssueDate) {
   const issueDate = new Date(licenceIssueDate);
   const currentDate = new Date();
 
-  const yearsHeld = (currentDate - issueDate) / millisecondsInYear;
+  const yearsHeld = Math.floor((currentDate - issueDate) / millisecondsInYear);
 
   return yearsHeld;
 }
 
 function getCarClass(carType) {
+  const carTypes = ["Compact", "Electric", "Cabrio", "Racer"];
   if (carTypes.includes(carType)) {
     return carType;
   }
@@ -112,18 +112,28 @@ function getDays(pickUpDate, dropOffDate) {
 }
 
 function getSeason(pickUpDate, dropOffDate) {
-  const seasonStartMonth = 3; // April, months are zero-based
-  const seasonEndMonth = 9; // October
+  const highSeasonStartMonth = 3; // April, months are zero-based
+  const highSeasonEndMonth = 9; // October
 
   const pickUpMonth = new Date(pickUpDate).getMonth();
   const dropOffMonth = new Date(dropOffDate).getMonth();
 
   const isHighSeason =
-    (pickUpMonth >= seasonStartMonth && pickUpMonth <= seasonEndMonth) ||
-    (dropOffMonth >= seasonStartMonth && dropOffMonth <= seasonEndMonth) ||
-    (pickUpMonth < seasonStartMonth && dropOffMonth > seasonEndMonth);
+    (pickUpMonth >= highSeasonStartMonth &&
+      pickUpMonth <= highSeasonEndMonth) ||
+    (dropOffMonth >= highSeasonStartMonth &&
+      dropOffMonth <= highSeasonEndMonth) ||
+    (pickUpMonth < highSeasonStartMonth && dropOffMonth > highSeasonEndMonth);
 
   return isHighSeason ? "High" : "Low";
 }
 
-exports.price = price;
+module.exports = {
+  price,
+  isDriverElegible,
+  getCarClass,
+  getLicenceYearsHeld,
+  getDays,
+  getSeason,
+  applyPriceModifiers,
+};
