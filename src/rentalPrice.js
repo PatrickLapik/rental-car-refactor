@@ -77,7 +77,8 @@ function applyPriceModifiers(
     price *= 0.9;
   }
 
-  return price;
+  return Number(price.toFixed(2));
+  ;
 }
 
 function getLicenceYearsHeld(licenceIssueDate) {
